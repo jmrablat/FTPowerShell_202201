@@ -25,4 +25,12 @@ Get-Service
 Get-Service | Sort-Object Status, DisplayName
 Get-Service | Where-Object Status -eq "Running"
 Get-ChildItem | Where-Object LastWriteTime -gt (get-date).AddMonths(-1)
-ls | Where-Object Length -gt 10mB | Sort-Object LastWriteTime
+cd /
+ls | Where-Object Length -gt 10mB | Sort-Object LastWriteTime | Export-Csv \test.csv -Delimiter ";" -Encoding Default -NoTypeInformation
+ls | Where-Object Length -gt 10mB | Sort-Object LastWriteTime | Select-Object Name, Length, LastWriteTime, CreationTime | Export-Csv tilde\test.csv -Delimiter ";" -Encoding Default -NoTypeInformation
+#bloc de script nécessaire
+ls | Where-Object Length -gt 10MB -and LastWriteTime -eq 2022
+#bloc de script
+cd / | ls | Where-Object { $_.Length -gt 10MB}
+# contexte diponibles Providers
+Get-PSProvider
