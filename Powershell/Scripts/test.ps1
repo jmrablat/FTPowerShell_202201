@@ -34,3 +34,15 @@ ls | Where-Object Length -gt 10MB -and LastWriteTime -eq 2022
 cd / | ls | Where-Object { $_.Length -gt 10MB}
 # contexte diponibles Providers
 Get-PSProvider
+# Créer un tableau de 1 à 10
+1..10
+# pour forcer le bloc de script utilisation du ForEach-Object
+# bloc de script indispensable pour utiliser $_
+1..10 | ForEach-Object {$_ * 2}
+1..10 | % {$_ * 2}
+# test avec fichier ou.txt
+cd ..
+cat .\ou.txt
+cat .\ou.txt | ForEach-Object{$Texte = $_; $texte.replace("OU=","")}
+cat .\ou.txt | ForEach-Object{$Texte = $_; $texte.replace("OU=","").replace(",DC=form,DC=lan","")}
+cat .\ou.txt | ForEach-Object{$Texte = $_; $texte.split(",")[0].replace("OU=","")}
