@@ -1,0 +1,165 @@
+﻿Windows PowerShell
+Copyright (C) Microsoft Corporation. Tous droits réservés.
+
+Testez le nouveau système multiplateforme PowerShell https://aka.ms/pscore6
+
+PS C:\Windows\system32> hostname
+VMJMR
+PS C:\Windows\system32> $Ordis = "VMJMR", "VMSTEPHANE", "VMFRANCH-2", "VMNICOLAS"
+PS C:\Windows\system32> $Ordis
+VMJMR
+VMSTEPHANE
+VMFRANCH-2
+VMNICOLAS
+PS C:\Windows\system32> $Ordis = "VMJMR", "VMSTEPHANE", "VMFRANCk-2", "VMNICOLAS"
+PS C:\Windows\system32> $Ordis
+VMJMR
+VMSTEPHANE
+VMFRANCk-2
+VMNICOLAS
+PS C:\Windows\system32> Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv4-In)" -Enabled True
+Set-NetFirewallRule : Aucun objet MSFT_NetFirewallRule avec la propriété «DisplayName» égale à «File and Printer
+Sharing (Echo Request - ICMPv4-In)» n’a été trouvé. Vérifiez la valeur de la propriété et réessayez.
+Au caractère Ligne:1 : 1
++ Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Requ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (File and Printe...st - ICMPv4-In):String) [Set-NetFirewallRule], CimJob
+   Exception
+    + FullyQualifiedErrorId : CmdletizationQuery_NotFound_DisplayName,Set-NetFirewallRule
+
+PS C:\Windows\system32> ping VMNICOLAS                                                                                  
+Envoi d’une requête 'ping' sur VMNICOLAS.form.lan [10.140.30.69] avec 32 octets de données :
+Délai d’attente de la demande dépassé.
+Délai d’attente de la demande dépassé.
+Délai d’attente de la demande dépassé.
+Délai d’attente de la demande dépassé.
+
+Statistiques Ping pour 10.140.30.69:
+    Paquets : envoyés = 4, reçus = 0, perdus = 4 (perte 100%),
+PS C:\Windows\system32> ping VMNICOLAS
+
+Envoi d’une requête 'ping' sur VMNICOLAS.form.lan [10.140.30.69] avec 32 octets de données :
+Réponse de 10.140.30.69 : octets=32 temps=1 ms TTL=128
+Réponse de 10.140.30.69 : octets=32 temps=2 ms TTL=128
+Réponse de 10.140.30.69 : octets=32 temps=2 ms TTL=128
+Réponse de 10.140.30.69 : octets=32 temps=1 ms TTL=128
+
+Statistiques Ping pour 10.140.30.69:
+    Paquets : envoyés = 4, reçus = 4, perdus = 0 (perte 0%),
+Durée approximative des boucles en millisecondes :
+    Minimum = 1ms, Maximum = 2ms, Moyenne = 1ms
+PS C:\Windows\system32> Set-NetFirewallRule -Name FPS-ICMP4-ERQ-In -Enabled True                                        PS C:\Windows\system32> Test-Connection $Ordis
+
+Source        Destination     IPV4Address      IPV6Address                              Bytes    Time(ms)
+------        -----------     -----------      -----------                              -----    --------
+VMJMR         VMJMR           10.140.30.63     fe80::dd57:14e6:57ae:fb04%3              32       0
+VMJMR         VMJMR           10.140.30.63     fe80::dd57:14e6:57ae:fb04%3              32       0
+VMJMR         VMJMR           10.140.30.63     fe80::dd57:14e6:57ae:fb04%3              32       0
+VMJMR         VMJMR           10.140.30.63     fe80::dd57:14e6:57ae:fb04%3              32       0
+VMJMR         VMSTEPHANE      10.140.30.64                                              32       2
+VMJMR         VMSTEPHANE      10.140.30.64                                              32       2
+VMJMR         VMSTEPHANE      10.140.30.64                                              32       1
+VMJMR         VMSTEPHANE      10.140.30.64                                              32       1
+VMJMR         VMFRANCk-2      10.140.30.70                                              32       2
+VMJMR         VMFRANCk-2      10.140.30.70                                              32       2
+VMJMR         VMFRANCk-2      10.140.30.70                                              32       2
+VMJMR         VMFRANCk-2      10.140.30.70                                              32       2
+VMJMR         VMNICOLAS       10.140.30.69                                              32       2
+VMJMR         VMNICOLAS       10.140.30.69                                              32       1
+VMJMR         VMNICOLAS       10.140.30.69                                              32       2
+VMJMR         VMNICOLAS       10.140.30.69                                              32       1
+
+
+PS C:\Windows\system32> Set-NetFirewallRule -Name FPS-ICMP4-ERQ-In -Enabled True -Profile any
+PS C:\Windows\system32> Test-Connection $Ordis -Source DC1-Nicolas
+
+Source        Destination     IPV4Address      IPV6Address                              Bytes    Time(ms)
+------        -----------     -----------      -----------                              -----    --------
+DC1-NICOLAS   VMJMR           10.140.30.63     fe80::dd57:14e6:57ae:fb04%3              32       0
+DC1-NICOLAS   VMJMR           10.140.30.63     fe80::dd57:14e6:57ae:fb04%3              32       2
+DC1-NICOLAS   VMJMR           10.140.30.63     fe80::dd57:14e6:57ae:fb04%3              32       1
+DC1-NICOLAS   VMJMR           10.140.30.63     fe80::dd57:14e6:57ae:fb04%3              32       1
+DC1-NICOLAS   VMSTEPHANE      10.140.30.64                                              32       1
+DC1-NICOLAS   VMSTEPHANE      10.140.30.64                                              32       1
+DC1-NICOLAS   VMSTEPHANE      10.140.30.64                                              32       1
+DC1-NICOLAS   VMSTEPHANE      10.140.30.64                                              32       0
+DC1-NICOLAS   VMFRANCk-2      10.140.30.70                                              32       0
+DC1-NICOLAS   VMFRANCk-2      10.140.30.70                                              32       1
+DC1-NICOLAS   VMFRANCk-2      10.140.30.70                                              32       1
+DC1-NICOLAS   VMFRANCk-2      10.140.30.70                                              32       2
+DC1-NICOLAS   VMNICOLAS       10.140.30.69                                              32       1
+DC1-NICOLAS   VMNICOLAS       10.140.30.69                                              32       1
+DC1-NICOLAS   VMNICOLAS       10.140.30.69                                              32       0
+DC1-NICOLAS   VMNICOLAS       10.140.30.69                                              32       1
+
+
+PS C:\Windows\system32> Invoke-Command -ComputerName VMNICOLAS -ScriptBlock {Get-Service Spooler}
+
+Status   Name               DisplayName                            PSComputerName
+------   ----               -----------                            --------------
+Running  Spooler            Spouleur d’impression                  VMNICOLAS
+
+
+PS C:\Windows\system32> Invoke-Command -ComputerName VMNICOLAS -ScriptBlock {Get-NetAdapter | Select-Object MacAddress}
+
+MacAddress        PSComputerName RunspaceId
+----------        -------------- ----------
+00-15-5D-1E-3A-01 VMNICOLAS      0f290cf8-bf7f-4958-918f-f098ebcb4a11
+
+
+PS C:\Windows\system32> Invoke-Command -ComputerName $ordis -ScriptBlock {Get-NetAdapter | Select-Object MacAddress}
+
+MacAddress        PSComputerName RunspaceId
+----------        -------------- ----------
+00-15-5D-1E-37-00 VMJMR          26368f38-f06e-47bf-a96c-69b6003872ae
+00-15-5D-1E-41-00 VMFRANCk-2     be8a84fa-326b-4964-a639-86ef224141be
+00-15-5D-1E-3A-01 VMNICOLAS      ad3d1b9e-fa5c-46b1-adea-f308be5b7163
+00-15-5D-1E-38-00 VMSTEPHANE     172becff-4217-470e-9cbb-28a8f2660795
+
+
+PS C:\Windows\system32> ise
+PS C:\Windows\system32> Invoke-Command -ComputerName $Ordis -FilePath 'C:\Users\jm\Desktop\creerdossier.ps1'
+
+created PSComputerName RunspaceId                                                                                       ------- -------------- ----------                                                                                         False VMJMR          e8504ad5-61ef-4b75-a978-30d4c3098d30                                                                True VMFRANCk-2     11f39079-2bab-4d34-b363-a02c5032d86a                                                                True VMSTEPHANE     63bad54a-00fc-4ab0-baeb-baef63160ce6                                                                True VMNICOLAS      94d56732-22d8-4020-93ee-4b63e735815e
+
+
+PS C:\Windows\system32> Invoke-Command -ComputerName VMNICOLAS -ScriptBlock {$Test = 10}
+PS C:\Windows\system32> Invoke-Command -ComputerName VMNICOLAS -ScriptBlock {$Test}
+PS C:\Windows\system32> $SessionNico = New-PSSession -Compuet
+New-PSSession : Impossible de trouver un paramètre correspondant au nom « Compuet ».
+Au caractère Ligne:1 : 30
++ $SessionNico = New-PSSession -Compuet
++                              ~~~~~~~~
+    + CategoryInfo          : InvalidArgument : (:) [New-PSSession], ParameterBindingException
+    + FullyQualifiedErrorId : NamedParameterNotFound,Microsoft.PowerShell.Commands.NewPSSessionCommand
+
+PS C:\Windows\system32>
+PS C:\Windows\system32> $SessionNico = New-PSSession -Compuet
+New-PSSession : Impossible de trouver un paramètre correspondant au nom « Compuet ».
+Au caractère Ligne:1 : 30
++ $SessionNico = New-PSSession -Compuet
++                              ~~~~~~~~
+    + CategoryInfo          : InvalidArgument : (:) [New-PSSession], ParameterBindingException
+    + FullyQualifiedErrorId : NamedParameterNotFound,Microsoft.PowerShell.Commands.NewPSSessionCommand
+
+PS C:\Windows\system32> $SessionNico = New-PSSession -ComputerName VMNICOLAS
+PS C:\Windows\system32> Invoke-Command -Session $SessionNico -ScriptBlock {$Test = 10}
+PS C:\Windows\system32> Invoke-Command -Session $SessionNico -ScriptBlock {$Test}
+10
+PS C:\Windows\system32> cd ..
+PS C:\Windows> cd ..
+PS C:\> cd .\JMR\
+PS C:\JMR> ls
+PS C:\JMR> New-Item FichierImportantACopierJMR.txt -Value "ouf j'ai pu être copié"
+
+
+    Répertoire : C:\JMR
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        13/01/2022     14:24             24 FichierImportantACopierJMR.txt
+
+
+PS C:\JMR> Copy-Item .\FichierImportantACopierJMR.txt c:\JMR\ -ToSession $SessionNico
+PS C:\JMR>
