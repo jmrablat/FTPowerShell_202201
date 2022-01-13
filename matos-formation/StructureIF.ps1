@@ -1,0 +1,1 @@
+﻿<#    La structure if permet d'exécuter du code en fonction d'une condition    Syntaxe    if(Condition(s)){                Bloc de script    }#># On déclare une note$Note = 8# Si la note est supérieure ou égale à 10if($Note -ge 10){    Write-Host "L'élève est admis !" -ForegroundColor Green}

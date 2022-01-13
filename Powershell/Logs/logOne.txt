@@ -1,0 +1,4 @@
+logOne.txt
+2022/01/13 15:42:15 - oulala
+2022/01/13 15:44:07 - oulala
+2022/01/13 15:44:24 - le message est obligatoire

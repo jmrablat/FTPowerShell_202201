@@ -1,0 +1,8 @@
+OU=Domain Controllers,DC=form,DC=lan
+OU=Executive,DC=form,DC=lan
+OU=Finance,DC=form,DC=lan
+OU=Marketing,DC=form,DC=lan
+OU=Operations,DC=form,DC=lan
+OU=IT,DC=form,DC=lan
+OU=Vente,DC=form,DC=lan
+OU=Recherche,DC=form,DC=lan
